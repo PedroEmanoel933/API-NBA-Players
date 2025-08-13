@@ -83,5 +83,43 @@ class Players
             $stmt->execute();
             return true;
         } 
+
+    // READ BY ID
+    public function getById($id)
+    {
+        $bd = "SELECT * FROM players WHERE id = :id";
+        
+        $stmt = $this->connect->prepare($bd);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getByStatus($status)
+{
+    $bd = "SELECT * FROM players WHERE status = :status";
+    $stmt = $this->connect->prepare($bd);
+    $stmt->bindParam(":status", $status, PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function getByTeam($team)
+{
+    $bd = "SELECT * FROM players WHERE team = :team";
+    $stmt = $this->connect->prepare($bd);
+    $stmt->bindParam(":team", $team, PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function getByPosition($position)
+{
+    $bd = "SELECT * FROM players WHERE position = :position";
+    $stmt = $this->connect->prepare($bd);
+    $stmt->bindParam(":position", $position, PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }
 ?>
