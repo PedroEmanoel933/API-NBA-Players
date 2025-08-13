@@ -56,7 +56,7 @@ class Players
     // UPDATE
     public function updatePlayer()
     {
-            $bd = "UPDATE players SET id = :id, player_fullname = :player_fullname, height = :height, team = :team, position = :position, status = :status";
+            $bd = "UPDATE players SET player_fullname = :player_fullname, height = :height, team = :team, position = :position, status = :status, titles = :titles WHERE id = :id";
             $stmt = $this->connect->prepare($bd);
 
             $stmt->bindParam(":id", $this->id, PDO::PARAM_INT);
@@ -67,9 +67,10 @@ class Players
             $stmt->bindParam(":position", $this->position, PDO::PARAM_STR);
             $stmt->bindParam(":titles", $this->titles, PDO::PARAM_STR);
 
-            $stmt->execute();
-            return true;
-        
+            if($stmt->execute()){
+                return true;
+            }
+            return false;
     }
 
     // DELETE

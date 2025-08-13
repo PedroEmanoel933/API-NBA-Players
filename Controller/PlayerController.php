@@ -52,6 +52,7 @@ class PlayerController{
 
         if(isset($data->player_fullname) && isset($data->height) && isset($data->status) && isset($data->team) && isset($data->titles)){   
             $player = new Players();
+            $player->id = $data->id;
             $player -> player_fullname = $data->player_fullname;
             $player -> height = $data->height;
             $player -> status = $data->status;
